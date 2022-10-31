@@ -1,7 +1,7 @@
 <script setup>
 import {ref ,onMounted, onUnmounted} from 'vue';
 import {debounce} from 'lodash';
-import {Document, Menu as IconMenu, Setting, Sunny, Moon, Expand, Fold} from '@element-plus/icons-vue';
+import {Document, Menu as IconMenu, Setting, Sunny, Moon, Expand, Fold, Cpu, Odometer, List, Share} from '@element-plus/icons-vue';
 
 const innerWidth = ref(window.innerWidth);
 const innerHeight = ref(window.innerHeight);
@@ -76,40 +76,45 @@ onUnmounted(() => {
 <template>
     <div class="common-layout">
         <el-container>
-            <el-aside id="side-menu" :width="isCollapse ? '80px' : '200px'" class="duration-300" >
+            <el-aside id="side-menu" :width="isCollapse ? '80px' : '210px'" class="duration-300" >
                 <el-menu default-active="1" :collapse="isCollapse" :style="'min-height:'+ innerHeight + 'px'" @open="handleOpen" @close="handleClose">
                     <el-menu-item index="0">
-                        LOGO
+                        <div v-if="isCollapse">
+                            SC
+                        </div>
+                        <div v-else>
+                            SysCat
+                        </div>
                     </el-menu-item>
                     <el-sub-menu index="1">
                         <template #title>
-                            <el-icon><Document /></el-icon>
-                            <span>Navigator One</span>
+                            <el-icon><IconMenu /></el-icon>
+                            <span>System</span>
                         </template>
-                        <el-menu-item-group>
-                            <template #title><span>Group One</span></template>
-                            <el-menu-item index="1-1">Item One</el-menu-item>
-                            <el-menu-item index="1-2">Item Two</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="Group Two">
-                            <el-menu-item index="1-3">Item Three</el-menu-item>
-                        </el-menu-item-group>
-                        <el-sub-menu index="1-4">
-                            <template #title><span>Item Four</span></template>
-                            <el-menu-item index="1-4-1">Item One</el-menu-item>
-                        </el-sub-menu>
+                        <el-menu-item index="1-1">OS</el-menu-item>
+                        <el-menu-item index="1-2">CPU</el-menu-item>
+                        <el-menu-item index="1-3">Memory</el-menu-item>
+                        <el-menu-item index="1-4">Disk</el-menu-item>
+                        <el-menu-item index="1-5">Network</el-menu-item>
+                        <el-menu-item index="1-6">User</el-menu-item>
                     </el-sub-menu>
-                    <el-menu-item index="2">
-                        <el-icon><IconMenu /></el-icon>
-                        <template #title><span>Navigator Two</span></template>
-                    </el-menu-item>
+                    <el-sub-menu index="2">
+                        <template #title>
+                            <el-icon><Odometer /></el-icon>
+                            <span>Performance</span>
+                        </template>
+                        <el-menu-item index="2-1">CPU</el-menu-item>
+                        <el-menu-item index="2-2">Memory</el-menu-item>
+                        <el-menu-item index="2-3">Disk</el-menu-item>
+                        <el-menu-item index="2-4">Network</el-menu-item>
+                    </el-sub-menu>
                     <el-menu-item index="3">
-                        <el-icon><Document /></el-icon>
-                        <template #title><span>Navigator Three</span></template>
+                        <el-icon><List /></el-icon>
+                        <template #title><span>Process</span></template>
                     </el-menu-item>
                     <el-menu-item index="4">
-                        <el-icon><Setting /></el-icon>
-                        <template #title><span>Navigator Four</span></template>
+                        <el-icon><Share /></el-icon>
+                        <template #title><span>Network</span></template>
                     </el-menu-item>
                 </el-menu>
             </el-aside>
@@ -121,18 +126,12 @@ onUnmounted(() => {
                             <el-icon v-else><Fold /></el-icon>
                         </el-button>
                         <div class="flex-grow" />
-                        <el-menu-item index="0">Processing Center</el-menu-item>
+                        <el-menu-item index="0">Overview</el-menu-item>
                         <el-sub-menu index="1">
-                            <template #title>Workspace</template>
-                            <el-menu-item index="1-1">Item One</el-menu-item>
-                            <el-menu-item index="1-2">Item Two</el-menu-item>
-                            <el-menu-item index="1-3">Item Three</el-menu-item>
-                            <el-sub-menu index="1-4">
-                                <template #title><span>Item Four</span></template>
-                                <el-menu-item index="1-4-1">Item One</el-menu-item>
-                                <el-menu-item index="1-4-2">Item Two</el-menu-item>
-                                <el-menu-item index="1-4-3">Item Three</el-menu-item>
-                            </el-sub-menu>
+                            <template #title>Help</template>
+                            <el-menu-item index="1-1">About SysCat</el-menu-item>
+                            <el-menu-item index="1-2">Check for Update</el-menu-item>
+                            <el-menu-item index="1-3">Support</el-menu-item>
                         </el-sub-menu>
                         <el-switch v-model="mode" @click="changeMode" style="margin-left: 24px; margin-top: 12px;" inline-prompt :active-icon="Sunny" :inactive-icon="Moon" />
                     </el-menu>
